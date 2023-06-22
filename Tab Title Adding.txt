@@ -1,0 +1,17 @@
+import React, { useEffect } from 'react';
+
+
+useEffect(() => {
+    let alertShow = false;
+
+    const intervalId = setInterval(() => {
+      document.title = alertShow
+        ? 'Welcome to Roshins Page'
+        : 'Follow my GitHub, guys!';
+      alertShow = !alertShow;
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);

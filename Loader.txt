@@ -1,0 +1,99 @@
+function Loader() {
+  return (
+    <div className="wrapper">
+      <div className="bg">
+        <div className="load"></div>
+      </div>
+      <div className="text">Loading...</div>
+    </div>
+  );
+}
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 20000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+
+
+
+
+loader.scss
+
+@import url(https://fonts.googleapis.com/css?family=Bungee);
+$loadingTime: 20s;
+$color: rgb(255, 192, 203);
+
+body {
+  background-color: white;
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes percentage {
+  @for $i from 1 through 100 {
+    $percentage: $i + "%";
+    #{$percentage} {
+      content: $percentage;
+    }
+  }
+}
+
+.bg {
+  background-color: $color;
+  animation: loading $loadingTime linear infinite;
+}
+
+.load {
+  color: $color;
+  width: 200px;
+  border: 1px solid $color;
+
+  &:after {
+    padding-left: 20px;
+    content: "0%";
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 20px;
+    color: rgb(0, 255, 255);
+    mix-blend-mode: difference;
+    animation: percentage $loadingTime linear infinite;
+  }
+}
+
+html {
+  height: 100%;
+  background-color: white;
+  font-family: 'Bungee', sans-serif;
+  font-weight: bold;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.text {
+  margin-left: 10px;
+  margin-bottom: 100px;
+  font-family: 'Bungee';
+  color: rgb(255, 182, 193);
+  font-size: 1.7rem;
+}
+
+
